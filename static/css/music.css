@@ -1,0 +1,105 @@
+/* CSS Document */
+    body {
+        background: #000000;
+    }
+    .first{
+        background-size: cover;
+        background-image: url("../images/first.png");
+    }
+    .logo{
+        margin-top: 50px;
+        margin-bottom: 160px;
+    }
+
+    .first_block{
+        margin-left: 11%;
+        margin-bottom: 340px;
+    }
+
+    .txt_phone{
+        padding-left: 5%;
+        color: #ffffff;
+        font-size:30px;
+        background:#0a0601;
+        border:1px solid #8c8c8c;
+        border-radius:40px;
+        line-height: 80px;
+        width:70%;
+        margin-bottom: 35px;
+    }
+
+    .txt_name{
+        padding-left: 5%;
+        color: #ffffff;
+        font-size:30px;
+        background:#0a0601;
+        border:1px solid #8c8c8c;
+        border-radius:40px;
+        line-height: 80px;
+        width:33%;
+        margin-right: 20px;
+    }
+
+    .txt_age{
+        padding-left: 5%;
+        color: #ffffff;
+        font-size:30px;
+        background:#0a0601;
+        border:1px solid #8c8c8c;
+        border-radius:40px;
+        line-height: 80px;
+        width:28%;
+        margin-right: 20px;
+    }
+
+    .txt_code{
+        padding-left: 5%;
+        color: #ffffff;
+        font-size:30px;
+        background:#0a0601;
+        border:1px solid #8c8c8c;
+        border-radius:40px;
+        line-height: 80px;
+        width:34%;
+        margin-right: 20px;
+    }
+    input::-webkit-input-placeholder{ /*WebKit browsers*/
+
+        color: #8c8c8c;
+        /*padding-left: 5%;*/
+
+    }
+    .button1 {
+        color: #8c8c8c;
+        font-size:30px;
+        background:#0a0601;
+        border:1px solid #8c8c8c;
+        border-radius:40px;
+        line-height: 80px;
+        width:33%;
+    }
+
+    .button2{
+        color: #000000;
+        font-weight: bolder;
+        font-size:40px;
+        background:#f4dd31;
+        border-radius:40px;
+        height: 100px;
+        width:75%;
+        border:0px;
+    }
+
+    .second{
+        background-size: cover;
+        background-image: url("../images/second.png");
+        padding-top: 100px;
+        padding-bottom: 100px;
+    }
+
+    .third{
+        background-size: cover;
+        background-image: url("../images/third.png");
+        #padding-top: 40px;
+        padding-bottom: 100px;
+    }
