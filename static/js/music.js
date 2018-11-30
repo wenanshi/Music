@@ -11,27 +11,38 @@ HOST = "https://admin.yyfcdrm.com";
 
 // 验证码
 function checkVcode() {
-    // baby_name = $("#form_lession input[name='baby_name']");
+    baby_name = $("#form_lession input[name='baby_name']");
     // baby_age_year = $("#form_lession select[name='year']");
     // baby_age_month = $("#form_lession select[name='month']");
     // baby_age_day = $("#form_lession select[name='day']");
+    baby_birthday = $("#form_lession input[name='baby_birthday']");
     baby_mobile = $("#form_lession input[name='baby_mobile']");
 
-    // baby_name.val(baby_name.val().trim());
+    baby_name.val(baby_name.val().trim());
     baby_mobile.val(baby_mobile.val().trim());
+    baby_birthday.val(baby_birthday.val().trim());
+    if (baby_name.val().length==0) {
+        alert("请输入孩子姓名");
+        baby_name.focus()
+        return false;
+    }
 
-    // if (baby_name.val().length==0) {
-    //     alert("请输入孩子姓名");
-    //     baby_name.focus()
-    //     return false;
-    // }
-    //
-    // if (baby_name.val().length>8) {
-    //     alert("孩子姓名过长");
-    //     baby_name.focus()
-    //     return false;
-    // }
-
+    if (baby_name.val().length>8) {
+        alert("孩子姓名过长");
+        baby_name.focus()
+        return false;
+    }
+    var date = baby_birthday.val().match(/^(\d{4})(-)(\d{2})(-)(\d{2})$/);
+    if(date==null){
+        alert("请输入正确始的日期格式,如:2010-01-01");
+        return false;
+    }
+    var b_d=new Date(date[1],date[3]-1,date[5]);
+    var b_num = (b_d.getFullYear()==date[1]&&(b_d.getMonth()+1)==date[3]&&b_d.getDate()==date[5]);
+    if(b_num==0){
+        alert("出生日期不合法,请输入正确的出生日期");
+        return false;
+    }
     // if (baby_age_year.val()==0) {
     //     alert("请选择孩子生日");
     //     baby_age_year.focus();
@@ -72,23 +83,23 @@ function checkVcode() {
 
 }
 
-function autoLayout() {
-    h = $(window).height()
-    h = h>920?h:920
-    for (var i = 1; i <= 8; i++) {
-        console.log('dd')
-        $('.page'+i).css("height", h);
-    }
-}
-
-function goLocation(href_a) {
-    $('#menu_box a').each(function(i, a) {
-
-        console.log($(a).attr('attr_location'));
-    })
-    console.log($('#menu_box li'));
-    // $(href_a).attr('attr_location');
-}
+// function autoLayout() {
+//     h = $(window).height()
+//     h = h>920?h:920
+//     for (var i = 1; i <= 8; i++) {
+//         console.log('dd')
+//         $('.page'+i).css("height", h);
+//     }
+// }
+//
+// function goLocation(href_a) {
+//     $('#menu_box a').each(function(i, a) {
+//
+//         console.log($(a).attr('attr_location'));
+//     })
+//     console.log($('#menu_box li'));
+//     // $(href_a).attr('attr_location');
+// }
 
 // 钢琴课
 function checkLession() {
@@ -107,133 +118,133 @@ function checkLession() {
     return false;
 }
 
-(function($){
-    $.extend({
-        ms_DatePicker: function (options) {
-            var defaults = {
-                YearSelector: "#sel_year",
-                MonthSelector: "#sel_month",
-                DaySelector: "#sel_day",
-                FirstText: "--",
-                FirstValue: 0
-            };
-            var opts = $.extend({}, defaults, options);
-            var $YearSelector = $(opts.YearSelector);
-            var $MonthSelector = $(opts.MonthSelector);
-            var $DaySelector = $(opts.DaySelector);
-            var FirstText = opts.FirstText;
-            var FirstValue = opts.FirstValue;
-
-            // 初始化
-            var str = "<option value=\"" + FirstValue + "\">" + FirstText + "</option>";
-            $YearSelector.html(str);
-            $MonthSelector.html(str);
-            $DaySelector.html(str);
-
-            // 年份列表
-            var yearNow = new Date().getFullYear();
-            var yearSel = $YearSelector.attr("rel");
-            for (var i = yearNow; i >= 1900; i--) {
-                var sed = yearSel==i?"selected":"";
-                var yearStr = "<option value=\"" + i + "\" " + sed+">" + i + "</option>";
-                $YearSelector.append(yearStr);
-            }
-
-            // 月份列表
-            var monthSel = $MonthSelector.attr("rel");
-            for (var i = 1; i <= 12; i++) {
-                var sed = monthSel==i?"selected":"";
-                var monthStr = "<option value=\"" + i + "\" "+sed+">" + i + "</option>";
-                $MonthSelector.append(monthStr);
-            }
-
-            // 日列表(仅当选择了年月)
-            function BuildDay() {
-                if ($YearSelector.val() == 0 || $MonthSelector.val() == 0) {
-                    // 未选择年份或者月份
-                    $DaySelector.html(str);
-                } else {
-                    $DaySelector.html(str);
-                    var year = parseInt($YearSelector.val());
-                    var month = parseInt($MonthSelector.val());
-                    var dayCount = 0;
-                    switch (month) {
-                        case 1:
-                        case 3:
-                        case 5:
-                        case 7:
-                        case 8:
-                        case 10:
-                        case 12:
-                            dayCount = 31;
-                            break;
-                        case 4:
-                        case 6:
-                        case 9:
-                        case 11:
-                            dayCount = 30;
-                            break;
-                        case 2:
-                            dayCount = 28;
-                            if ((year % 4 == 0) && (year % 100 != 0) || (year % 400 == 0)) {
-                                dayCount = 29;
-                            }
-                            break;
-                        default:
-                            break;
-                    }
-                    
-                    var daySel = $DaySelector.attr("rel");
-                    for (var i = 1; i <= dayCount; i++) {
-                        var sed = daySel==i?"selected":"";
-                        var dayStr = "<option value=\"" + i + "\" "+sed+">" + i + "</option>";
-                        $DaySelector.append(dayStr);
-                    }
-                }
-            }
-            $MonthSelector.change(function () {
-                BuildDay();
-            });
-            $YearSelector.change(function () {
-                BuildDay();
-            });
-            if($DaySelector.attr("rel")!=""){
-                BuildDay();
-            }
-        } // End ms_DatePicker
-    });
-})(jQuery);
+// (function($){
+//     $.extend({
+//         ms_DatePicker: function (options) {
+//             var defaults = {
+//                 YearSelector: "#sel_year",
+//                 MonthSelector: "#sel_month",
+//                 DaySelector: "#sel_day",
+//                 FirstText: "--",
+//                 FirstValue: 0
+//             };
+//             var opts = $.extend({}, defaults, options);
+//             var $YearSelector = $(opts.YearSelector);
+//             var $MonthSelector = $(opts.MonthSelector);
+//             var $DaySelector = $(opts.DaySelector);
+//             var FirstText = opts.FirstText;
+//             var FirstValue = opts.FirstValue;
+//
+//             // 初始化
+//             var str = "<option value=\"" + FirstValue + "\">" + FirstText + "</option>";
+//             $YearSelector.html(str);
+//             $MonthSelector.html(str);
+//             $DaySelector.html(str);
+//
+//             // 年份列表
+//             var yearNow = new Date().getFullYear();
+//             var yearSel = $YearSelector.attr("rel");
+//             for (var i = yearNow; i >= 1900; i--) {
+//                 var sed = yearSel==i?"selected":"";
+//                 var yearStr = "<option value=\"" + i + "\" " + sed+">" + i + "</option>";
+//                 $YearSelector.append(yearStr);
+//             }
+//
+//             // 月份列表
+//             var monthSel = $MonthSelector.attr("rel");
+//             for (var i = 1; i <= 12; i++) {
+//                 var sed = monthSel==i?"selected":"";
+//                 var monthStr = "<option value=\"" + i + "\" "+sed+">" + i + "</option>";
+//                 $MonthSelector.append(monthStr);
+//             }
+//
+//             // 日列表(仅当选择了年月)
+//             function BuildDay() {
+//                 if ($YearSelector.val() == 0 || $MonthSelector.val() == 0) {
+//                     // 未选择年份或者月份
+//                     $DaySelector.html(str);
+//                 } else {
+//                     $DaySelector.html(str);
+//                     var year = parseInt($YearSelector.val());
+//                     var month = parseInt($MonthSelector.val());
+//                     var dayCount = 0;
+//                     switch (month) {
+//                         case 1:
+//                         case 3:
+//                         case 5:
+//                         case 7:
+//                         case 8:
+//                         case 10:
+//                         case 12:
+//                             dayCount = 31;
+//                             break;
+//                         case 4:
+//                         case 6:
+//                         case 9:
+//                         case 11:
+//                             dayCount = 30;
+//                             break;
+//                         case 2:
+//                             dayCount = 28;
+//                             if ((year % 4 == 0) && (year % 100 != 0) || (year % 400 == 0)) {
+//                                 dayCount = 29;
+//                             }
+//                             break;
+//                         default:
+//                             break;
+//                     }
+//
+//                     var daySel = $DaySelector.attr("rel");
+//                     for (var i = 1; i <= dayCount; i++) {
+//                         var sed = daySel==i?"selected":"";
+//                         var dayStr = "<option value=\"" + i + "\" "+sed+">" + i + "</option>";
+//                         $DaySelector.append(dayStr);
+//                     }
+//                 }
+//             }
+//             $MonthSelector.change(function () {
+//                 BuildDay();
+//             });
+//             $YearSelector.change(function () {
+//                 BuildDay();
+//             });
+//             if($DaySelector.attr("rel")!=""){
+//                 BuildDay();
+//             }
+//         } // End ms_DatePicker
+//     });
+// })(jQuery);
 
 $(function() {
-    $.ms_DatePicker({
-        YearSelector: "#select_year",
-        MonthSelector: "#select_month",
-        DaySelector: "#select_day"
-    });
+    // $.ms_DatePicker({
+    //     YearSelector: "#select_year",
+    //     MonthSelector: "#select_month",
+    //     DaySelector: "#select_day"
+    // });
 
 
-    $('#menu_box a').each(function(i, a) {
-        $(a).click(function(e) {
-            $('#menu_box a').each(function(i, a) {
-                $(a).removeClass('active');
-            });
-            $(e.target).addClass('active');
-        })
-    });
+    // $('#menu_box a').each(function(i, a) {
+    //     $(a).click(function(e) {
+    //         $('#menu_box a').each(function(i, a) {
+    //             $(a).removeClass('active');
+    //         });
+    //         $(e.target).addClass('active');
+    //     })
+    // });
 
-    $(".showpic-img").hover(function(){
-        $(this).find("em").slideDown();
-    },function(){
-        $(this).find("em").slideUp();
-    });
-
-    $("#btn1").click(function(){
-        $(".topppot-mask").show();
-    })
-
-    $(".close-topppot").click(function(){
-        $(".topppot-mask").hide();
-    })
+    // $(".showpic-img").hover(function(){
+    //     $(this).find("em").slideDown();
+    // },function(){
+    //     $(this).find("em").slideUp();
+    // });
+    //
+    // $("#btn1").click(function(){
+    //     $(".topppot-mask").show();
+    // })
+    //
+    // $(".close-topppot").click(function(){
+    //     $(".topppot-mask").hide();
+    // })
 
     $("#btn_get_code").click(function(){
         if (checkVcode()) {
@@ -281,14 +292,13 @@ $(function() {
 
     $("#btn_submit_lession").click(function(){
         if (checkLession()) {
-            //baby_name = $("#form_lession input[name='baby_name']");
+            baby_name = $("#form_lession input[name='baby_name']");
             //baby_age_year = $("#form_lession select[name='year']");
             //baby_age_month = $("#form_lession select[name='month']");
             //baby_age_day = $("#form_lession select[name='day']");
             baby_mobile = $("#form_lession input[name='baby_mobile']");
             baby_vcode = $("#form_lession input[name='baby_vcode']");
-
-
+            baby_birthday = $("#form_lession input[name='baby_birthday']");
             //baby_bithday_value = baby_age_year.val() + '-' + ('00'+baby_age_month.val()).substr(-2) + '-' + ('00'+baby_age_day.val()).substr(-2);
 
             url = HOST + "/stu/website/studentRegistrationFromOfficialWebsiteAndGetFreeProduct";
@@ -296,8 +306,8 @@ $(function() {
                 url: url,
                 data: {
                     vcode : baby_vcode.val().trim(),
-                    //user_baby_name: baby_name.val().trim(),
-                    //user_baby_birthday : baby_bithday_value,
+                    user_baby_name: baby_name.val().trim(),
+                    user_baby_birthday : baby_bithday_value,
                     mobile: baby_mobile.val().trim()
                 },
                 success: function(data) {
