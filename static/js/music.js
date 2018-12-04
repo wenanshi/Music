@@ -1,13 +1,9 @@
+if (location.hostname == 'www.ruiwenjy.com' || location.hostname == 'www.yinyuefengchao.com') {
+    HOST = "https://admin.yyfcdrm.com";
+} else {
+    HOST = "https://cms-ubtest-admin.ruiwenjy.com";
+}
 
-
-
-
-// if (location.hostname == 'www.ruiwenjy.com' || location.hostname == 'www.yinyuefengchao.com') {
-//     HOST = "https://admin.yyfcdrm.com";
-// } else {
-//     HOST = "https://cms-ubtest-admin.ruiwenjy.com";
-// }
-HOST = "https://admin.yyfcdrm.com";
 
 // 验证码
 function checkVcode() {

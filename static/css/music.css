@@ -4,7 +4,7 @@
     }
     .first{
         background-size: cover;
-        background-image: url("../images/first.png");
+        background-image: url("../images/first.jpg");
     }
     .logo{
         margin-top: 50px;
@@ -92,14 +92,14 @@
 
     .second{
         background-size: cover;
-        background-image: url("../images/second.png");
+        background-image: url("../images/second.jpg");
         padding-top: 100px;
         padding-bottom: 100px;
     }
 
     .third{
         background-size: cover;
-        background-image: url("../images/third.png");
+        background-image: url("../images/third.jpg");
         #padding-top: 40px;
         padding-bottom: 100px;
     }
