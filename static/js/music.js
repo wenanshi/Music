@@ -274,8 +274,10 @@ $(function() {
                     if (data.header) {
                         if (data.header.code != 0) {
                             alert(data.header.msg);
+                            return false;
                         } else {
                             alert("验证码发送成功.")
+                            return false;
                         }
                     }
                     return false;
@@ -312,9 +314,10 @@ $(function() {
                     if (data.header) {
                         if (data.header.code != 0) {
                             alert(data.header.msg);
+                            return false;
                         } else {
                             alert("尊敬的用户您好，您在音乐蜂巢预约的一节免费钢琴课已经申请成功，我们的销售代表会尽快与您联系。");
-                            $(".topppot-mask").hide();
+                            return false;
                         }
                         return false;
                     }
@@ -376,11 +379,13 @@ $(function() {
                 if (data.header) {
                     if (data.header.code != 0) {
                         alert(data.header.msg);
+                        return false;
                     } else {
                         alert("您的申请已经收到，我们的销售代表会尽快与您联系。");
                         stu_name.val('');
                         stu_age.val('');
                         stu_mobile.val('');
+                        return false;
                     }
                     return false;
                 }
